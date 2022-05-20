@@ -3,7 +3,7 @@
 
 ### The Content 
 
-[1] Embedded C
-[2] Software engineering Tooling
-[3] Embedded Systems Tooling
-[4] Interfacing
+- [x] Embedded C
+- [x] Software engineering Tooling
+- [x] Embedded Systems Tooling
+- [x] Interfacing
