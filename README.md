@@ -7,3 +7,5 @@
 - [x] Software engineering Tooling
 - [x] Embedded Systems Tooling
 - [x] Interfacing
+- [x] Sotware testing [ISTQB - FL]
+
