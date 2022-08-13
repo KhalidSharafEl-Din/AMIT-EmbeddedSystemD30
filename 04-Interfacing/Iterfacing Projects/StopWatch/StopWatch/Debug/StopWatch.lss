@@ -1,0 +1,550 @@
+
+StopWatch.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000406  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000016  00800060  00000406  0000049a  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          0000001e  00800076  00800076  000004b0  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  000004b0  2**0
+                  CONTENTS, READONLY
+  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  000004e0  2**2
+                  CONTENTS, READONLY
+  5 .debug_aranges 00000020  00000000  00000000  0000051c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_info   00000861  00000000  00000000  0000053c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_abbrev 000005bf  00000000  00000000  00000d9d  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_line   00000373  00000000  00000000  0000135c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_frame  00000034  00000000  00000000  000016d0  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_str    000003bf  00000000  00000000  00001704  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_loc    000001f7  00000000  00000000  00001ac3  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_ranges 00000010  00000000  00000000  00001cba  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+   8:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+   c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  10:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  14:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  18:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  1c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  20:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  24:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  28:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  2c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  30:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  34:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  38:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  3c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  40:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  44:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  48:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  4c:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+  50:	0c 94 47 00 	jmp	0x8e	; 0x8e <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d8 e0       	ldi	r29, 0x08	; 8
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+
+00000060 <__do_copy_data>:
+  60:	10 e0       	ldi	r17, 0x00	; 0
+  62:	a0 e6       	ldi	r26, 0x60	; 96
+  64:	b0 e0       	ldi	r27, 0x00	; 0
+  66:	e6 e0       	ldi	r30, 0x06	; 6
+  68:	f4 e0       	ldi	r31, 0x04	; 4
+  6a:	02 c0       	rjmp	.+4      	; 0x70 <__do_copy_data+0x10>
+  6c:	05 90       	lpm	r0, Z+
+  6e:	0d 92       	st	X+, r0
+  70:	a6 37       	cpi	r26, 0x76	; 118
+  72:	b1 07       	cpc	r27, r17
+  74:	d9 f7       	brne	.-10     	; 0x6c <__do_copy_data+0xc>
+
+00000076 <__do_clear_bss>:
+  76:	20 e0       	ldi	r18, 0x00	; 0
+  78:	a6 e7       	ldi	r26, 0x76	; 118
+  7a:	b0 e0       	ldi	r27, 0x00	; 0
+  7c:	01 c0       	rjmp	.+2      	; 0x80 <.do_clear_bss_start>
+
+0000007e <.do_clear_bss_loop>:
+  7e:	1d 92       	st	X+, r1
+
+00000080 <.do_clear_bss_start>:
+  80:	a4 39       	cpi	r26, 0x94	; 148
+  82:	b2 07       	cpc	r27, r18
+  84:	e1 f7       	brne	.-8      	; 0x7e <.do_clear_bss_loop>
+  86:	0e 94 49 00 	call	0x92	; 0x92 <main>
+  8a:	0c 94 01 02 	jmp	0x402	; 0x402 <_exit>
+
+0000008e <__bad_interrupt>:
+  8e:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000092 <main>:
+long int counter=0, HOURS=0, MINS=0, SECS=0;
+int HoursTens=0, HoursOnes=0, MinsTens=0, MinsOnes=0, SecTens=0, SecOnes=0;
+char startFlag=0, pauseFlag=0, stopFlag=1; 
+
+int main(void)
+{	
+  92:	cf 93       	push	r28
+  94:	df 93       	push	r29
+  96:	cd b7       	in	r28, 0x3d	; 61
+  98:	de b7       	in	r29, 0x3e	; 62
+  9a:	68 97       	sbiw	r28, 0x18	; 24
+  9c:	0f b6       	in	r0, 0x3f	; 63
+  9e:	f8 94       	cli
+  a0:	de bf       	out	0x3e, r29	; 62
+  a2:	0f be       	out	0x3f, r0	; 63
+  a4:	cd bf       	out	0x3d, r28	; 61
+	DDRA    = 0b00000000;		// The Buttons as INPUT
+  a6:	1a ba       	out	0x1a, r1	; 26
+    DDRC	= 0b01111111;		// 7Seg Pins as OUTPUT
+  a8:	8f e7       	ldi	r24, 0x7F	; 127
+  aa:	84 bb       	out	0x14, r24	; 20
+	DDRD	= 0b00111111;		// Enable Pins as OUTPUT
+  ac:	8f e3       	ldi	r24, 0x3F	; 63
+  ae:	81 bb       	out	0x11, r24	; 17
+	PORTA	= 0b00000111;		// Set The PULLUP for the Buttons
+  b0:	87 e0       	ldi	r24, 0x07	; 7
+  b2:	8b bb       	out	0x1b, r24	; 27
+	
+	int arr[10] = {0x3F,0x06,0x5B,0x4F,0x66,0x6D,0x7D,0x7,0x7F,0x6F};
+  b4:	84 e1       	ldi	r24, 0x14	; 20
+  b6:	e1 e6       	ldi	r30, 0x61	; 97
+  b8:	f0 e0       	ldi	r31, 0x00	; 0
+  ba:	de 01       	movw	r26, r28
+  bc:	11 96       	adiw	r26, 0x01	; 1
+  be:	01 90       	ld	r0, Z+
+  c0:	0d 92       	st	X+, r0
+  c2:	8a 95       	dec	r24
+  c4:	e1 f7       	brne	.-8      	; 0xbe <main+0x2c>
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+  c6:	2f ef       	ldi	r18, 0xFF	; 255
+  c8:	81 ee       	ldi	r24, 0xE1	; 225
+  ca:	94 e0       	ldi	r25, 0x04	; 4
+  cc:	21 50       	subi	r18, 0x01	; 1
+  ce:	80 40       	sbci	r24, 0x00	; 0
+  d0:	90 40       	sbci	r25, 0x00	; 0
+  d2:	e1 f7       	brne	.-8      	; 0xcc <main+0x3a>
+  d4:	00 c0       	rjmp	.+0      	; 0xd6 <main+0x44>
+  d6:	00 00       	nop
+	_delay_ms(DELAY);
+    while (1) 
+    {
+		PORTD = 0b00000001;			// Switch to 7Seg_2
+  d8:	81 e0       	ldi	r24, 0x01	; 1
+  da:	82 bb       	out	0x12, r24	; 18
+		PORTC = arr[HoursOnes];				// Write the Ones on the first 7Seg
+  dc:	e0 91 80 00 	lds	r30, 0x0080	; 0x800080 <HoursOnes>
+  e0:	f0 91 81 00 	lds	r31, 0x0081	; 0x800081 <HoursOnes+0x1>
+  e4:	ee 0f       	add	r30, r30
+  e6:	ff 1f       	adc	r31, r31
+  e8:	81 e0       	ldi	r24, 0x01	; 1
+  ea:	90 e0       	ldi	r25, 0x00	; 0
+  ec:	8c 0f       	add	r24, r28
+  ee:	9d 1f       	adc	r25, r29
+  f0:	e8 0f       	add	r30, r24
+  f2:	f9 1f       	adc	r31, r25
+  f4:	80 81       	ld	r24, Z
+  f6:	85 bb       	out	0x15, r24	; 21
+		PORTC |= (1<<7);
+  f8:	85 b3       	in	r24, 0x15	; 21
+  fa:	80 68       	ori	r24, 0x80	; 128
+  fc:	85 bb       	out	0x15, r24	; 21
+  fe:	8f e1       	ldi	r24, 0x1F	; 31
+ 100:	9e e4       	ldi	r25, 0x4E	; 78
+ 102:	01 97       	sbiw	r24, 0x01	; 1
+ 104:	f1 f7       	brne	.-4      	; 0x102 <main+0x70>
+ 106:	00 c0       	rjmp	.+0      	; 0x108 <main+0x76>
+ 108:	00 00       	nop
+		_delay_ms(5);
+		
+		PORTD = 0b000000010;		// Switch to 7Seg_3
+ 10a:	82 e0       	ldi	r24, 0x02	; 2
+ 10c:	82 bb       	out	0x12, r24	; 18
+		PORTC = arr[MinsTens];								// Write the Tens on the second 7Seg
+ 10e:	e0 91 7e 00 	lds	r30, 0x007E	; 0x80007e <MinsTens>
+ 112:	f0 91 7f 00 	lds	r31, 0x007F	; 0x80007f <MinsTens+0x1>
+ 116:	ee 0f       	add	r30, r30
+ 118:	ff 1f       	adc	r31, r31
+ 11a:	81 e0       	ldi	r24, 0x01	; 1
+ 11c:	90 e0       	ldi	r25, 0x00	; 0
+ 11e:	8c 0f       	add	r24, r28
+ 120:	9d 1f       	adc	r25, r29
+ 122:	e8 0f       	add	r30, r24
+ 124:	f9 1f       	adc	r31, r25
+ 126:	80 81       	ld	r24, Z
+ 128:	85 bb       	out	0x15, r24	; 21
+ 12a:	8f e1       	ldi	r24, 0x1F	; 31
+ 12c:	9e e4       	ldi	r25, 0x4E	; 78
+ 12e:	01 97       	sbiw	r24, 0x01	; 1
+ 130:	f1 f7       	brne	.-4      	; 0x12e <main+0x9c>
+ 132:	00 c0       	rjmp	.+0      	; 0x134 <main+0xa2>
+ 134:	00 00       	nop
+		_delay_ms(5);				// This Delay is set to reduce the interference between them
+		
+		PORTD = 0b00000100;			// Switch to 7Seg_4
+ 136:	84 e0       	ldi	r24, 0x04	; 4
+ 138:	82 bb       	out	0x12, r24	; 18
+		PORTC = arr[MinsOnes];								// Write the Tens on the second 7Seg
+ 13a:	e0 91 7c 00 	lds	r30, 0x007C	; 0x80007c <MinsOnes>
+ 13e:	f0 91 7d 00 	lds	r31, 0x007D	; 0x80007d <MinsOnes+0x1>
+ 142:	ee 0f       	add	r30, r30
+ 144:	ff 1f       	adc	r31, r31
+ 146:	81 e0       	ldi	r24, 0x01	; 1
+ 148:	90 e0       	ldi	r25, 0x00	; 0
+ 14a:	8c 0f       	add	r24, r28
+ 14c:	9d 1f       	adc	r25, r29
+ 14e:	e8 0f       	add	r30, r24
+ 150:	f9 1f       	adc	r31, r25
+ 152:	80 81       	ld	r24, Z
+ 154:	85 bb       	out	0x15, r24	; 21
+		PORTC |= (1<<7);
+ 156:	85 b3       	in	r24, 0x15	; 21
+ 158:	80 68       	ori	r24, 0x80	; 128
+ 15a:	85 bb       	out	0x15, r24	; 21
+ 15c:	8f e1       	ldi	r24, 0x1F	; 31
+ 15e:	9e e4       	ldi	r25, 0x4E	; 78
+ 160:	01 97       	sbiw	r24, 0x01	; 1
+ 162:	f1 f7       	brne	.-4      	; 0x160 <main+0xce>
+ 164:	00 c0       	rjmp	.+0      	; 0x166 <main+0xd4>
+ 166:	00 00       	nop
+		_delay_ms(5);				// This Delay is set to reduce the interference between them
+		
+		PORTD = 0b00001000;			// Switch to 7Seg_5
+ 168:	88 e0       	ldi	r24, 0x08	; 8
+ 16a:	82 bb       	out	0x12, r24	; 18
+		PORTC = arr[SecTens];								// Write the Tens on the second 7Seg
+ 16c:	e0 91 7a 00 	lds	r30, 0x007A	; 0x80007a <SecTens>
+ 170:	f0 91 7b 00 	lds	r31, 0x007B	; 0x80007b <SecTens+0x1>
+ 174:	ee 0f       	add	r30, r30
+ 176:	ff 1f       	adc	r31, r31
+ 178:	81 e0       	ldi	r24, 0x01	; 1
+ 17a:	90 e0       	ldi	r25, 0x00	; 0
+ 17c:	8c 0f       	add	r24, r28
+ 17e:	9d 1f       	adc	r25, r29
+ 180:	e8 0f       	add	r30, r24
+ 182:	f9 1f       	adc	r31, r25
+ 184:	80 81       	ld	r24, Z
+ 186:	85 bb       	out	0x15, r24	; 21
+ 188:	8f e1       	ldi	r24, 0x1F	; 31
+ 18a:	9e e4       	ldi	r25, 0x4E	; 78
+ 18c:	01 97       	sbiw	r24, 0x01	; 1
+ 18e:	f1 f7       	brne	.-4      	; 0x18c <main+0xfa>
+ 190:	00 c0       	rjmp	.+0      	; 0x192 <main+0x100>
+ 192:	00 00       	nop
+		_delay_ms(5);				// This Delay is set to reduce the interference between them
+		
+		PORTD = 0b00010000;			// Switch to 7Seg_6
+ 194:	80 e1       	ldi	r24, 0x10	; 16
+ 196:	82 bb       	out	0x12, r24	; 18
+		PORTC = arr[SecOnes];								// Write the Tens on the second 7Seg
+ 198:	e0 91 78 00 	lds	r30, 0x0078	; 0x800078 <SecOnes>
+ 19c:	f0 91 79 00 	lds	r31, 0x0079	; 0x800079 <SecOnes+0x1>
+ 1a0:	ee 0f       	add	r30, r30
+ 1a2:	ff 1f       	adc	r31, r31
+ 1a4:	81 e0       	ldi	r24, 0x01	; 1
+ 1a6:	90 e0       	ldi	r25, 0x00	; 0
+ 1a8:	8c 0f       	add	r24, r28
+ 1aa:	9d 1f       	adc	r25, r29
+ 1ac:	e8 0f       	add	r30, r24
+ 1ae:	f9 1f       	adc	r31, r25
+ 1b0:	80 81       	ld	r24, Z
+ 1b2:	85 bb       	out	0x15, r24	; 21
+		PORTC |= (1<<7);
+ 1b4:	85 b3       	in	r24, 0x15	; 21
+ 1b6:	80 68       	ori	r24, 0x80	; 128
+ 1b8:	85 bb       	out	0x15, r24	; 21
+ 1ba:	8f e1       	ldi	r24, 0x1F	; 31
+ 1bc:	9e e4       	ldi	r25, 0x4E	; 78
+ 1be:	01 97       	sbiw	r24, 0x01	; 1
+ 1c0:	f1 f7       	brne	.-4      	; 0x1be <main+0x12c>
+ 1c2:	00 c0       	rjmp	.+0      	; 0x1c4 <main+0x132>
+ 1c4:	00 00       	nop
+		_delay_ms(5);				// This Delay is set to reduce the interference between them
+		
+		PORTD = 0b00100000;			// Switch to 7Seg_1
+ 1c6:	80 e2       	ldi	r24, 0x20	; 32
+ 1c8:	82 bb       	out	0x12, r24	; 18
+		PORTC = arr[HoursTens];								// Write the Tens on the second 7Seg
+ 1ca:	e0 91 82 00 	lds	r30, 0x0082	; 0x800082 <HoursTens>
+ 1ce:	f0 91 83 00 	lds	r31, 0x0083	; 0x800083 <HoursTens+0x1>
+ 1d2:	ee 0f       	add	r30, r30
+ 1d4:	ff 1f       	adc	r31, r31
+ 1d6:	81 e0       	ldi	r24, 0x01	; 1
+ 1d8:	90 e0       	ldi	r25, 0x00	; 0
+ 1da:	8c 0f       	add	r24, r28
+ 1dc:	9d 1f       	adc	r25, r29
+ 1de:	e8 0f       	add	r30, r24
+ 1e0:	f9 1f       	adc	r31, r25
+ 1e2:	80 81       	ld	r24, Z
+ 1e4:	85 bb       	out	0x15, r24	; 21
+ 1e6:	8f e1       	ldi	r24, 0x1F	; 31
+ 1e8:	9e e4       	ldi	r25, 0x4E	; 78
+ 1ea:	01 97       	sbiw	r24, 0x01	; 1
+ 1ec:	f1 f7       	brne	.-4      	; 0x1ea <main+0x158>
+ 1ee:	00 c0       	rjmp	.+0      	; 0x1f0 <main+0x15e>
+ 1f0:	00 00       	nop
+		_delay_ms(5);				// This Delay is set to reduce the interference between them
+		
+		if(CHECK_BIT(PINA, 0) == 0){				// Start
+ 1f2:	c8 99       	sbic	0x19, 0	; 25
+ 1f4:	09 c0       	rjmp	.+18     	; 0x208 <main+0x176>
+			startFlag = 1;		pauseFlag = 0;		stopFlag = 0;
+ 1f6:	81 e0       	ldi	r24, 0x01	; 1
+ 1f8:	80 93 77 00 	sts	0x0077, r24	; 0x800077 <startFlag>
+ 1fc:	10 92 76 00 	sts	0x0076, r1	; 0x800076 <__data_end>
+ 200:	10 92 60 00 	sts	0x0060, r1	; 0x800060 <__DATA_REGION_ORIGIN__>
+			while(CHECK_BIT(PINA, 0) == 0);
+ 204:	c8 9b       	sbis	0x19, 0	; 25
+ 206:	fe cf       	rjmp	.-4      	; 0x204 <main+0x172>
+		}
+		if(CHECK_BIT(PINA, 1) == 0){				// Pause
+ 208:	c9 99       	sbic	0x19, 1	; 25
+ 20a:	09 c0       	rjmp	.+18     	; 0x21e <main+0x18c>
+			startFlag = 0;		pauseFlag = 1;		stopFlag = 0;
+ 20c:	10 92 77 00 	sts	0x0077, r1	; 0x800077 <startFlag>
+ 210:	81 e0       	ldi	r24, 0x01	; 1
+ 212:	80 93 76 00 	sts	0x0076, r24	; 0x800076 <__data_end>
+ 216:	10 92 60 00 	sts	0x0060, r1	; 0x800060 <__DATA_REGION_ORIGIN__>
+			while(CHECK_BIT(PINA, 1) == 0);
+ 21a:	c9 9b       	sbis	0x19, 1	; 25
+ 21c:	fe cf       	rjmp	.-4      	; 0x21a <main+0x188>
+		}
+		if(CHECK_BIT(PINA, 2) == 0){				// STOP
+ 21e:	ca 99       	sbic	0x19, 2	; 25
+ 220:	09 c0       	rjmp	.+18     	; 0x234 <main+0x1a2>
+			startFlag = 0;		pauseFlag = 0;		stopFlag = 1;
+ 222:	10 92 77 00 	sts	0x0077, r1	; 0x800077 <startFlag>
+ 226:	10 92 76 00 	sts	0x0076, r1	; 0x800076 <__data_end>
+ 22a:	81 e0       	ldi	r24, 0x01	; 1
+ 22c:	80 93 60 00 	sts	0x0060, r24	; 0x800060 <__DATA_REGION_ORIGIN__>
+			while(CHECK_BIT(PINA, 2) == 0);
+ 230:	ca 9b       	sbis	0x19, 2	; 25
+ 232:	fe cf       	rjmp	.-4      	; 0x230 <main+0x19e>
+		}
+		
+		if (pauseFlag == 1){startFlag=0;  stopFlag=0;}
+ 234:	80 91 76 00 	lds	r24, 0x0076	; 0x800076 <__data_end>
+ 238:	81 30       	cpi	r24, 0x01	; 1
+ 23a:	21 f4       	brne	.+8      	; 0x244 <main+0x1b2>
+ 23c:	10 92 77 00 	sts	0x0077, r1	; 0x800077 <startFlag>
+ 240:	10 92 60 00 	sts	0x0060, r1	; 0x800060 <__DATA_REGION_ORIGIN__>
+		if (stopFlag == 1){startFlag=0;  stopFlag=0; counter =0;}
+ 244:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 248:	81 30       	cpi	r24, 0x01	; 1
+ 24a:	61 f4       	brne	.+24     	; 0x264 <main+0x1d2>
+ 24c:	10 92 77 00 	sts	0x0077, r1	; 0x800077 <startFlag>
+ 250:	10 92 60 00 	sts	0x0060, r1	; 0x800060 <__DATA_REGION_ORIGIN__>
+ 254:	10 92 90 00 	sts	0x0090, r1	; 0x800090 <counter>
+ 258:	10 92 91 00 	sts	0x0091, r1	; 0x800091 <counter+0x1>
+ 25c:	10 92 92 00 	sts	0x0092, r1	; 0x800092 <counter+0x2>
+ 260:	10 92 93 00 	sts	0x0093, r1	; 0x800093 <counter+0x3>
+		if (startFlag == 1){counter++;  pauseFlag=0;  stopFlag=0;}
+ 264:	80 91 77 00 	lds	r24, 0x0077	; 0x800077 <startFlag>
+ 268:	81 30       	cpi	r24, 0x01	; 1
+ 26a:	b9 f4       	brne	.+46     	; 0x29a <main+0x208>
+ 26c:	80 91 90 00 	lds	r24, 0x0090	; 0x800090 <counter>
+ 270:	90 91 91 00 	lds	r25, 0x0091	; 0x800091 <counter+0x1>
+ 274:	a0 91 92 00 	lds	r26, 0x0092	; 0x800092 <counter+0x2>
+ 278:	b0 91 93 00 	lds	r27, 0x0093	; 0x800093 <counter+0x3>
+ 27c:	01 96       	adiw	r24, 0x01	; 1
+ 27e:	a1 1d       	adc	r26, r1
+ 280:	b1 1d       	adc	r27, r1
+ 282:	80 93 90 00 	sts	0x0090, r24	; 0x800090 <counter>
+ 286:	90 93 91 00 	sts	0x0091, r25	; 0x800091 <counter+0x1>
+ 28a:	a0 93 92 00 	sts	0x0092, r26	; 0x800092 <counter+0x2>
+ 28e:	b0 93 93 00 	sts	0x0093, r27	; 0x800093 <counter+0x3>
+ 292:	10 92 76 00 	sts	0x0076, r1	; 0x800076 <__data_end>
+ 296:	10 92 60 00 	sts	0x0060, r1	; 0x800060 <__DATA_REGION_ORIGIN__>
+		
+		
+		
+		SECS  =  counter % 60;				SecOnes = SECS%10;		SecTens = SECS/10;
+ 29a:	40 90 90 00 	lds	r4, 0x0090	; 0x800090 <counter>
+ 29e:	50 90 91 00 	lds	r5, 0x0091	; 0x800091 <counter+0x1>
+ 2a2:	60 90 92 00 	lds	r6, 0x0092	; 0x800092 <counter+0x2>
+ 2a6:	70 90 93 00 	lds	r7, 0x0093	; 0x800093 <counter+0x3>
+ 2aa:	0f 2e       	mov	r0, r31
+ 2ac:	fc e3       	ldi	r31, 0x3C	; 60
+ 2ae:	8f 2e       	mov	r8, r31
+ 2b0:	91 2c       	mov	r9, r1
+ 2b2:	a1 2c       	mov	r10, r1
+ 2b4:	b1 2c       	mov	r11, r1
+ 2b6:	f0 2d       	mov	r31, r0
+ 2b8:	c3 01       	movw	r24, r6
+ 2ba:	b2 01       	movw	r22, r4
+ 2bc:	a5 01       	movw	r20, r10
+ 2be:	94 01       	movw	r18, r8
+ 2c0:	0e 94 c0 01 	call	0x380	; 0x380 <__divmodsi4>
+ 2c4:	2d 8b       	std	Y+21, r18	; 0x15
+ 2c6:	3e 8b       	std	Y+22, r19	; 0x16
+ 2c8:	4f 8b       	std	Y+23, r20	; 0x17
+ 2ca:	58 8f       	std	Y+24, r21	; 0x18
+ 2cc:	60 93 84 00 	sts	0x0084, r22	; 0x800084 <SECS>
+ 2d0:	70 93 85 00 	sts	0x0085, r23	; 0x800085 <SECS+0x1>
+ 2d4:	80 93 86 00 	sts	0x0086, r24	; 0x800086 <SECS+0x2>
+ 2d8:	90 93 87 00 	sts	0x0087, r25	; 0x800087 <SECS+0x3>
+ 2dc:	0f 2e       	mov	r0, r31
+ 2de:	fa e0       	ldi	r31, 0x0A	; 10
+ 2e0:	cf 2e       	mov	r12, r31
+ 2e2:	d1 2c       	mov	r13, r1
+ 2e4:	e1 2c       	mov	r14, r1
+ 2e6:	f1 2c       	mov	r15, r1
+ 2e8:	f0 2d       	mov	r31, r0
+ 2ea:	a7 01       	movw	r20, r14
+ 2ec:	96 01       	movw	r18, r12
+ 2ee:	0e 94 c0 01 	call	0x380	; 0x380 <__divmodsi4>
+ 2f2:	70 93 79 00 	sts	0x0079, r23	; 0x800079 <SecOnes+0x1>
+ 2f6:	60 93 78 00 	sts	0x0078, r22	; 0x800078 <SecOnes>
+ 2fa:	30 93 7b 00 	sts	0x007B, r19	; 0x80007b <SecTens+0x1>
+ 2fe:	20 93 7a 00 	sts	0x007A, r18	; 0x80007a <SecTens>
+		MINS  = (counter / 60)%60;			MinsOnes= MINS%10;		MinsTens = MINS/10;
+ 302:	6d 89       	ldd	r22, Y+21	; 0x15
+ 304:	7e 89       	ldd	r23, Y+22	; 0x16
+ 306:	8f 89       	ldd	r24, Y+23	; 0x17
+ 308:	98 8d       	ldd	r25, Y+24	; 0x18
+ 30a:	a5 01       	movw	r20, r10
+ 30c:	94 01       	movw	r18, r8
+ 30e:	0e 94 c0 01 	call	0x380	; 0x380 <__divmodsi4>
+ 312:	60 93 88 00 	sts	0x0088, r22	; 0x800088 <MINS>
+ 316:	70 93 89 00 	sts	0x0089, r23	; 0x800089 <MINS+0x1>
+ 31a:	80 93 8a 00 	sts	0x008A, r24	; 0x80008a <MINS+0x2>
+ 31e:	90 93 8b 00 	sts	0x008B, r25	; 0x80008b <MINS+0x3>
+ 322:	a7 01       	movw	r20, r14
+ 324:	96 01       	movw	r18, r12
+ 326:	0e 94 c0 01 	call	0x380	; 0x380 <__divmodsi4>
+ 32a:	70 93 7d 00 	sts	0x007D, r23	; 0x80007d <MinsOnes+0x1>
+ 32e:	60 93 7c 00 	sts	0x007C, r22	; 0x80007c <MinsOnes>
+ 332:	30 93 7f 00 	sts	0x007F, r19	; 0x80007f <MinsTens+0x1>
+ 336:	20 93 7e 00 	sts	0x007E, r18	; 0x80007e <MinsTens>
+		HOURS = (counter / 3600)%60;		HoursOnes = HOURS%10;	HoursTens = HOURS/10;
+ 33a:	c3 01       	movw	r24, r6
+ 33c:	b2 01       	movw	r22, r4
+ 33e:	20 e1       	ldi	r18, 0x10	; 16
+ 340:	3e e0       	ldi	r19, 0x0E	; 14
+ 342:	40 e0       	ldi	r20, 0x00	; 0
+ 344:	50 e0       	ldi	r21, 0x00	; 0
+ 346:	0e 94 c0 01 	call	0x380	; 0x380 <__divmodsi4>
+ 34a:	ca 01       	movw	r24, r20
+ 34c:	b9 01       	movw	r22, r18
+ 34e:	a5 01       	movw	r20, r10
+ 350:	94 01       	movw	r18, r8
+ 352:	0e 94 c0 01 	call	0x380	; 0x380 <__divmodsi4>
+ 356:	60 93 8c 00 	sts	0x008C, r22	; 0x80008c <HOURS>
+ 35a:	70 93 8d 00 	sts	0x008D, r23	; 0x80008d <HOURS+0x1>
+ 35e:	80 93 8e 00 	sts	0x008E, r24	; 0x80008e <HOURS+0x2>
+ 362:	90 93 8f 00 	sts	0x008F, r25	; 0x80008f <HOURS+0x3>
+ 366:	a7 01       	movw	r20, r14
+ 368:	96 01       	movw	r18, r12
+ 36a:	0e 94 c0 01 	call	0x380	; 0x380 <__divmodsi4>
+ 36e:	70 93 81 00 	sts	0x0081, r23	; 0x800081 <HoursOnes+0x1>
+ 372:	60 93 80 00 	sts	0x0080, r22	; 0x800080 <HoursOnes>
+ 376:	30 93 83 00 	sts	0x0083, r19	; 0x800083 <HoursTens+0x1>
+ 37a:	20 93 82 00 	sts	0x0082, r18	; 0x800082 <HoursTens>
+		
+	}
+ 37e:	ac ce       	rjmp	.-680    	; 0xd8 <main+0x46>
+
+00000380 <__divmodsi4>:
+ 380:	05 2e       	mov	r0, r21
+ 382:	97 fb       	bst	r25, 7
+ 384:	1e f4       	brtc	.+6      	; 0x38c <__divmodsi4+0xc>
+ 386:	00 94       	com	r0
+ 388:	0e 94 d7 01 	call	0x3ae	; 0x3ae <__negsi2>
+ 38c:	57 fd       	sbrc	r21, 7
+ 38e:	07 d0       	rcall	.+14     	; 0x39e <__divmodsi4_neg2>
+ 390:	0e 94 df 01 	call	0x3be	; 0x3be <__udivmodsi4>
+ 394:	07 fc       	sbrc	r0, 7
+ 396:	03 d0       	rcall	.+6      	; 0x39e <__divmodsi4_neg2>
+ 398:	4e f4       	brtc	.+18     	; 0x3ac <__divmodsi4_exit>
+ 39a:	0c 94 d7 01 	jmp	0x3ae	; 0x3ae <__negsi2>
+
+0000039e <__divmodsi4_neg2>:
+ 39e:	50 95       	com	r21
+ 3a0:	40 95       	com	r20
+ 3a2:	30 95       	com	r19
+ 3a4:	21 95       	neg	r18
+ 3a6:	3f 4f       	sbci	r19, 0xFF	; 255
+ 3a8:	4f 4f       	sbci	r20, 0xFF	; 255
+ 3aa:	5f 4f       	sbci	r21, 0xFF	; 255
+
+000003ac <__divmodsi4_exit>:
+ 3ac:	08 95       	ret
+
+000003ae <__negsi2>:
+ 3ae:	90 95       	com	r25
+ 3b0:	80 95       	com	r24
+ 3b2:	70 95       	com	r23
+ 3b4:	61 95       	neg	r22
+ 3b6:	7f 4f       	sbci	r23, 0xFF	; 255
+ 3b8:	8f 4f       	sbci	r24, 0xFF	; 255
+ 3ba:	9f 4f       	sbci	r25, 0xFF	; 255
+ 3bc:	08 95       	ret
+
+000003be <__udivmodsi4>:
+ 3be:	a1 e2       	ldi	r26, 0x21	; 33
+ 3c0:	1a 2e       	mov	r1, r26
+ 3c2:	aa 1b       	sub	r26, r26
+ 3c4:	bb 1b       	sub	r27, r27
+ 3c6:	fd 01       	movw	r30, r26
+ 3c8:	0d c0       	rjmp	.+26     	; 0x3e4 <__udivmodsi4_ep>
+
+000003ca <__udivmodsi4_loop>:
+ 3ca:	aa 1f       	adc	r26, r26
+ 3cc:	bb 1f       	adc	r27, r27
+ 3ce:	ee 1f       	adc	r30, r30
+ 3d0:	ff 1f       	adc	r31, r31
+ 3d2:	a2 17       	cp	r26, r18
+ 3d4:	b3 07       	cpc	r27, r19
+ 3d6:	e4 07       	cpc	r30, r20
+ 3d8:	f5 07       	cpc	r31, r21
+ 3da:	20 f0       	brcs	.+8      	; 0x3e4 <__udivmodsi4_ep>
+ 3dc:	a2 1b       	sub	r26, r18
+ 3de:	b3 0b       	sbc	r27, r19
+ 3e0:	e4 0b       	sbc	r30, r20
+ 3e2:	f5 0b       	sbc	r31, r21
+
+000003e4 <__udivmodsi4_ep>:
+ 3e4:	66 1f       	adc	r22, r22
+ 3e6:	77 1f       	adc	r23, r23
+ 3e8:	88 1f       	adc	r24, r24
+ 3ea:	99 1f       	adc	r25, r25
+ 3ec:	1a 94       	dec	r1
+ 3ee:	69 f7       	brne	.-38     	; 0x3ca <__udivmodsi4_loop>
+ 3f0:	60 95       	com	r22
+ 3f2:	70 95       	com	r23
+ 3f4:	80 95       	com	r24
+ 3f6:	90 95       	com	r25
+ 3f8:	9b 01       	movw	r18, r22
+ 3fa:	ac 01       	movw	r20, r24
+ 3fc:	bd 01       	movw	r22, r26
+ 3fe:	cf 01       	movw	r24, r30
+ 400:	08 95       	ret
+
+00000402 <_exit>:
+ 402:	f8 94       	cli
+
+00000404 <__stop_program>:
+ 404:	ff cf       	rjmp	.-2      	; 0x404 <__stop_program>

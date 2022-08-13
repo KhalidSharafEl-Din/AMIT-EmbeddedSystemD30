@@ -1,0 +1,163 @@
+
+LEDOneDir.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         000000d4  00000000  00000000  00000054  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000000  00800060  00800060  00000128  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .comment      00000030  00000000  00000000  00000128  2**0
+                  CONTENTS, READONLY
+  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  00000158  2**2
+                  CONTENTS, READONLY
+  4 .debug_aranges 00000020  00000000  00000000  00000194  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   00000656  00000000  00000000  000001b4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 00000579  00000000  00000000  0000080a  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   00000282  00000000  00000000  00000d83  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  00000024  00000000  00000000  00001008  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    0000034b  00000000  00000000  0000102c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    000000d8  00000000  00000000  00001377  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_ranges 00000010  00000000  00000000  0000144f  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 2a 00 	jmp	0x54	; 0x54 <__ctors_end>
+   4:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+   8:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+   c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  10:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  14:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  18:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  1c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  20:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  24:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  28:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  2c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  30:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  34:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  38:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  3c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  40:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  44:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  48:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  4c:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+  50:	0c 94 34 00 	jmp	0x68	; 0x68 <__bad_interrupt>
+
+00000054 <__ctors_end>:
+  54:	11 24       	eor	r1, r1
+  56:	1f be       	out	0x3f, r1	; 63
+  58:	cf e5       	ldi	r28, 0x5F	; 95
+  5a:	d8 e0       	ldi	r29, 0x08	; 8
+  5c:	de bf       	out	0x3e, r29	; 62
+  5e:	cd bf       	out	0x3d, r28	; 61
+  60:	0e 94 36 00 	call	0x6c	; 0x6c <main>
+  64:	0c 94 68 00 	jmp	0xd0	; 0xd0 <_exit>
+
+00000068 <__bad_interrupt>:
+  68:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+0000006c <main>:
+#define DELAY 100
+
+
+int main(void)
+{
+    DDRC = 0xFF;	DDRD = 0xFF;	// Set PORTC & PORTD as OUTPUT
+  6c:	8f ef       	ldi	r24, 0xFF	; 255
+  6e:	84 bb       	out	0x14, r24	; 20
+  70:	81 bb       	out	0x11, r24	; 17
+	PORTC = 0x00;	PORTD = 0x00;	// Init PORTC & PORTD to LOW
+  72:	15 ba       	out	0x15, r1	; 21
+  74:	12 ba       	out	0x12, r1	; 18
+    while (1) 
+    {
+		PORTC = 1;					// First LED in PORTC and Wait 
+  76:	81 e0       	ldi	r24, 0x01	; 1
+  78:	85 bb       	out	0x15, r24	; 21
+		for(int i= 0; i <8; i++){	// Shift the ONE through the register
+  7a:	20 e0       	ldi	r18, 0x00	; 0
+  7c:	30 e0       	ldi	r19, 0x00	; 0
+  7e:	0e c0       	rjmp	.+28     	; 0x9c <main+0x30>
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+  80:	4f ef       	ldi	r20, 0xFF	; 255
+  82:	81 ee       	ldi	r24, 0xE1	; 225
+  84:	94 e0       	ldi	r25, 0x04	; 4
+  86:	41 50       	subi	r20, 0x01	; 1
+  88:	80 40       	sbci	r24, 0x00	; 0
+  8a:	90 40       	sbci	r25, 0x00	; 0
+  8c:	e1 f7       	brne	.-8      	; 0x86 <main+0x1a>
+  8e:	00 c0       	rjmp	.+0      	; 0x90 <main+0x24>
+  90:	00 00       	nop
+			_delay_ms(DELAY	);
+			PORTC = PORTC << 1;		// to light every led in PORTC in sequence
+  92:	85 b3       	in	r24, 0x15	; 21
+  94:	88 0f       	add	r24, r24
+  96:	85 bb       	out	0x15, r24	; 21
+    DDRC = 0xFF;	DDRD = 0xFF;	// Set PORTC & PORTD as OUTPUT
+	PORTC = 0x00;	PORTD = 0x00;	// Init PORTC & PORTD to LOW
+    while (1) 
+    {
+		PORTC = 1;					// First LED in PORTC and Wait 
+		for(int i= 0; i <8; i++){	// Shift the ONE through the register
+  98:	2f 5f       	subi	r18, 0xFF	; 255
+  9a:	3f 4f       	sbci	r19, 0xFF	; 255
+  9c:	28 30       	cpi	r18, 0x08	; 8
+  9e:	31 05       	cpc	r19, r1
+  a0:	7c f3       	brlt	.-34     	; 0x80 <main+0x14>
+			_delay_ms(DELAY	);
+			PORTC = PORTC << 1;		// to light every led in PORTC in sequence
+		}
+		PORTD = 1;					// The same thing but for PORTD
+  a2:	81 e0       	ldi	r24, 0x01	; 1
+  a4:	82 bb       	out	0x12, r24	; 18
+		for(int i= 0; i <8; i++){
+  a6:	20 e0       	ldi	r18, 0x00	; 0
+  a8:	30 e0       	ldi	r19, 0x00	; 0
+  aa:	0e c0       	rjmp	.+28     	; 0xc8 <main+0x5c>
+  ac:	4f ef       	ldi	r20, 0xFF	; 255
+  ae:	81 ee       	ldi	r24, 0xE1	; 225
+  b0:	94 e0       	ldi	r25, 0x04	; 4
+  b2:	41 50       	subi	r20, 0x01	; 1
+  b4:	80 40       	sbci	r24, 0x00	; 0
+  b6:	90 40       	sbci	r25, 0x00	; 0
+  b8:	e1 f7       	brne	.-8      	; 0xb2 <main+0x46>
+  ba:	00 c0       	rjmp	.+0      	; 0xbc <main+0x50>
+  bc:	00 00       	nop
+			_delay_ms(DELAY);
+			PORTD = PORTD << 1;
+  be:	82 b3       	in	r24, 0x12	; 18
+  c0:	88 0f       	add	r24, r24
+  c2:	82 bb       	out	0x12, r24	; 18
+		for(int i= 0; i <8; i++){	// Shift the ONE through the register
+			_delay_ms(DELAY	);
+			PORTC = PORTC << 1;		// to light every led in PORTC in sequence
+		}
+		PORTD = 1;					// The same thing but for PORTD
+		for(int i= 0; i <8; i++){
+  c4:	2f 5f       	subi	r18, 0xFF	; 255
+  c6:	3f 4f       	sbci	r19, 0xFF	; 255
+  c8:	28 30       	cpi	r18, 0x08	; 8
+  ca:	31 05       	cpc	r19, r1
+  cc:	7c f3       	brlt	.-34     	; 0xac <main+0x40>
+  ce:	d3 cf       	rjmp	.-90     	; 0x76 <main+0xa>
+
+000000d0 <_exit>:
+  d0:	f8 94       	cli
+
+000000d2 <__stop_program>:
+  d2:	ff cf       	rjmp	.-2      	; 0xd2 <__stop_program>
